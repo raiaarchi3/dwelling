@@ -27,23 +27,14 @@ const config: Config = {
       borderRadius: {
         xl2: "1.25rem",
       },
-    },
-  },
-  plugins: [],
-};
-export default config;
-// tailwind.config.ts
-import type { Config } from "tailwindcss";
-
-const config: Config = {
-  theme: {
-    extend: {
+      // Safely integrated your custom animations into the main theme tree
       animation: {
         'bounce-slow': 'bounce 2s infinite',
         'pulse-fast': 'pulse 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-      }
+      },
     },
   },
   plugins: [],
 };
+
 export default config;
