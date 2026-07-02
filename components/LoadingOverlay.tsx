@@ -1,26 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface LoaderProps {
-  isVisible: boolean; // Add this line
+  isVisible: boolean; // Tells TypeScript this prop is allowed
   onFinish?: () => void;
 }
 
-export default function Loader({ onFinish }: LoaderProps) {
-  // Local safety state to make sure it can force-close itself
-  const [isVisible, setIsVisible] = useState(true);
+// Renamed to LoadingOverlay to match exactly what your app/page.tsx expects
+export default function LoadingOverlay({ isVisible, onFinish }: LoaderProps) {
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsVisible(false); // Hide locally
-      if (onFinish) onFinish(); // Notify parent page
-    }, 1200); // 1.2 seconds sharp
+    // If the parent tells the loader to hide, trigger the finish callback
+    if (!isVisible && onFinish) {
+      onFinish();
+    }
+  }, [isVisible, onFinish]);
 
-    return () => clearTimeout(timeout);
-  }, [onFinish]);
-
-  // If it's timed out, render absolutely nothing
+  // If isVisible is false, render absolutely nothing
   if (!isVisible) return null;
 
   return (
