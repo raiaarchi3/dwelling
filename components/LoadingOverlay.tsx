@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 interface LoaderProps {
+  isVisible: boolean; // Add this line
   onFinish?: () => void;
 }
 
